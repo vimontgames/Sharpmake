@@ -259,7 +259,11 @@ namespace Sharpmake
         {
             Context = context;
             Arguments = new Arguments(this);
+            #if DEBUG
+            _multithreaded = false;
+            #else
             _multithreaded = multithreaded;
+            #endif
             DumpDependencyGraph = dumpDependencyGraph;
             _cleanBlobsOnly = cleanBlobsOnly;
             BlobOnly = blobOnly;

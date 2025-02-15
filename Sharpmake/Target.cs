@@ -156,6 +156,11 @@ namespace Sharpmake
         /// </summary>
         maccatalyst = 1 << 14,
 
+        /// <summary>
+        /// Allows mixing ARM64 and x64 code within the same process on Windows 11 for ARM
+        /// </summary>
+        arm64ec = 1 << 15,
+
         // This is a reverse-growing section for undisclosed platforms
         _reserved10 = 1 << 21, // ACTIVE
         _reserved9  = 1 << 22, // ACTIVE
@@ -341,6 +346,9 @@ namespace Sharpmake
         public override string GetName(GraphicsAPI overrideGfxAPI = (GraphicsAPI)(-1))
         {
             string name = Optimization.ToString();
+
+            name += $" {Compiler.ToString()}";
+
             GraphicsAPI api = GfxAPI;
 
             if (overrideGfxAPI != (GraphicsAPI)(-1))
@@ -348,8 +356,6 @@ namespace Sharpmake
 
             if (api != GraphicsAPI.None)
                 name += $" {api.ToString()}";
-
-            name += $" {Compiler.ToString()}";
 
             return name;
         }
